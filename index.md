@@ -7,6 +7,17 @@ title: Vanjs
 <div id="app" class="reset"></div>
 
 <script>
+
+const onVisible = (element, callback) => {
+  const observer = new IntersectionObserver(([entry], obs) => {
+    if (entry.isIntersecting) {
+      callback();
+      obs.disconnect();
+    }
+  });
+  observer.observe(element);
+};
+
 const styled = (el) => {
   el.fontWeight = (v) => { el.style.fontWeight = v; return el; };
   el.fontSize = (v) => { el.style.fontSize = v; return el; };
@@ -39,6 +50,7 @@ const styled = (el) => {
   el.bottom = (v) => { el.style.bottom = v; return el; };
   el.overflow = (v) => { el.style.overflow = v; return el; };
   el.maxHeight = (v) => { el.style.maxHeight = v; return el; };
+  el.onAppear = (callback) => { onVisible(el, callback) ; return  el; }
 
   el.mountIn = (elementId) => {
       const target = document.getElementById(elementId)
@@ -66,10 +78,14 @@ const App = (element) => {
         .justifyContent('center')
         .alignItems('center')
         .marginInline('auto')
+
 }
 
 const iOSAsyncList = (load) => {
-    const state = van.state(load())
+    const state = van.state(undefined)
+
+    return div()
+        .onAppear(() => console.log('App appeared!'))
 }
 
 const iOSList = (items, cell = (item) => li(item.text)) => {
@@ -142,5 +158,5 @@ const items = [
     { text: "Item 3" }
 ];
 
-App(iOSList(items)).mountIn('app')
+App(iOSAsyncList()).mountIn('app')
 </script>
