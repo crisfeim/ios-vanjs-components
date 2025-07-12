@@ -16,7 +16,7 @@ const mockLoader = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(['Item 1', 'Item 2', 'Item 3']);
-    }, 10000);
+    }, 3);
   });
 
 const githubLoader = () => {
@@ -28,8 +28,25 @@ const githubLoader = () => {
     .then((data) => data.map((item) => item.name))
 }
 
-const mockList = iOSAsyncList('Screen', mockLoader)
-const githubList = iOSAsyncList('Github', githubLoader)
+const delay = (seconds, promiseFn) => {
+  return (...args) => {
+    return new Promise((resolve, reject) => {
+      const start = promiseFn(...args)
+      const delay = new Promise((r) => setTimeout(r, seconds * 1000))
 
-div(App(mockList)).mountIn('app');
+      Promise.all([start, delay])
+        .then(([result]) => resolve(result))
+        .catch(reject)
+    })
+  }
+}
+
+const mockList = () => iOSAsyncList('Screen', mockLoader)
+const githubList = () => iOSAsyncList('Github', delay(2,githubLoader))
+
+div(
+    App(githubList()),
+    App(mockList())
+)
+.mountIn('app');
 </script>

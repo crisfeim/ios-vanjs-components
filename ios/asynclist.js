@@ -6,8 +6,6 @@ const { p, div, style } = styledTags
 
 export const iOSAsyncList = (screenTitle, loader) => {
     const state = van.state({ status: 'loading', payload: [] })
-    const loadingView = iOSProgressView()
-    const errorView = p('Error')
 
     const load = async () => {
         loader()
@@ -16,8 +14,8 @@ export const iOSAsyncList = (screenTitle, loader) => {
     }
     return div(() => {
         const { status, payload } = state.val;
-        if (status === "loading") return loadingView;
+        if (status === "loading") return iOSProgressView();
         if (status === "success") return iOSList(screenTitle, payload).width('300px').aspectRatio('9 / 16');
-        if (status === "error") return errorView;
+        if (status === "error") return p('Error');
       }).onAppear(() => load())
 }
