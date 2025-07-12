@@ -7,7 +7,6 @@ title: Vanjs
 <div id="app" class="reset"></div>
 
 <script>
-
 const onVisible = (element, callback) => {
   const observer = new IntersectionObserver(([entry], obs) => {
     if (entry.isIntersecting) {
@@ -81,11 +80,34 @@ const App = (element) => {
 
 }
 
-const iOSAsyncList = (load) => {
-    const state = van.state(undefined)
+const mockLoader = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("success");
+    }, 1000);
+  });
 
-    return div()
-        .onAppear(() => console.log('App appeared!'))
+const iOSAsyncList = (loader = mockLoader) => {
+    const state = van.state({ status: 'loading', payload: null })
+    const successView = p('success')
+    const loadingView = p('Loading')
+    const errorView = p('Error')
+
+    const load = async () => {
+        loader()
+             .then((result) => {
+               state.val = { status: "success", payload: result };
+             })
+             .catch(() => {
+               state.val = { status: "error", payload: null };
+             });
+    }
+    return div(() => {
+        const { status } = state.val;
+        if (status === "loading") return loadingView;
+        if (status === "success") return successView;
+        if (status === "error") return errorView;
+      }).onAppear(() => load())
 }
 
 const iOSList = (items, cell = (item) => li(item.text)) => {
