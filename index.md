@@ -83,13 +83,14 @@ const App = (element) => {
 const mockLoader = () =>
   new Promise((resolve) => {
     setTimeout(() => {
-      resolve("success");
+      resolve(['Item 1', 'Item 2', 'Item 3']);
     }, 1000);
   });
 
-const iOSAsyncList = (loader = mockLoader) => {
-    const state = van.state({ status: 'loading', payload: null })
-    const successView = p('success')
+const iOSAsyncList = (screenTitle, loader = mockLoader) => {
+    const state = van.state({ status: 'loading', payload: [] })
+    const items = van.derive(() => state.val.payload)
+    const successView = iOSList(screenTitle, items.value).width('300px').aspectRatio('9 / 16')
     const loadingView = p('Loading')
     const errorView = p('Error')
 
@@ -110,8 +111,8 @@ const iOSAsyncList = (loader = mockLoader) => {
       }).onAppear(() => load())
 }
 
-const iOSList = (items, cell = (item) => li(item.text)) => {
-    const title = p('Screen')
+const iOSList = (screenTitle, items = ['Item 1', 'Item 2'], cell = (item) => li(item)) => {
+    const title = p(screenTitle)
       .fontWeight('bold')
       .fontSize('24px')
       .marginBottom('12px')
@@ -180,5 +181,5 @@ const items = [
     { text: "Item 3" }
 ];
 
-App(iOSAsyncList()).mountIn('app')
+App(iOSAsyncList('Screen')).mountIn('app')
 </script>
