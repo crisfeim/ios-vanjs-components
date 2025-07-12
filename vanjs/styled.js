@@ -1,3 +1,5 @@
+import van from "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.5.min.js"
+
 const onVisible = (element, callback) => {
   const observer = new IntersectionObserver(([entry], obs) => {
     if (entry.isIntersecting) {
@@ -41,6 +43,10 @@ const styled = (el) => {
   el.overflow = (v) => { el.style.overflow = v; return el; };
   el.maxHeight = (v) => { el.style.maxHeight = v; return el; };
   el.onAppear = (callback) => { onVisible(el, callback) ; return  el; }
+  el.onClick = (onClick) => {
+      el.addEventListener('click', onClick);
+      return el;
+  }
 
   el.mountIn = (elementId) => {
       const target = document.getElementById(elementId)
@@ -50,11 +56,8 @@ const styled = (el) => {
     return el;
 };
 
-const styledTags = new Proxy({}, {
+export const styledTags = new Proxy({}, {
   get(_, tag) {
     return (...args) => styled(van.tags[tag](...args));
   }
-});
-
-
-export { styledTags }
+})
