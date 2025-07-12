@@ -11,6 +11,7 @@ export const iOSList = (screenTitle, items, cell = (item) => li(item)) => {
     .background('white')
     .borderRadius('8px')
 
+
     const styles = style(`
         .ios-list ul li:hover::before {
           content: '';
@@ -59,6 +60,7 @@ export const iOSList = (screenTitle, items, cell = (item) => li(item)) => {
         .color('black')
         .padding('16px')
         .cursor('default')
+        .overflow('scroll')
 
     view.classList.add('ios-list')
     return view
