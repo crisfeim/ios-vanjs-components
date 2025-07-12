@@ -1,0 +1,70 @@
+.reset p:hover {
+    color: inherit;
+    opcaity: inherit;
+}
+
+.reset,
+.reset *,
+.reset *::before,
+.reset *::after,
+.reset ::backdrop,
+.reset ::file-selector-button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0 solid;
+  color: inherit;
+  opacity: inherit;
+  background: transparent;
+  color: black;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.reset ol,
+.reset ul,
+.reset menu {
+  list-style: none;
+}
+
+.reset img,
+.reset svg,
+.reset video,
+.reset canvas,
+.reset audio,
+.reset iframe,
+.reset embed,
+.reset object {
+  display: block;
+}
+
+.reset img,
+.reset video {
+  max-width: 100%;
+  height: auto;
+}
+
+.reset * {
+  display: revert;
+}
+
+.margin-x-auto {
+    margin-inline: auto;
+}
+
+.margin-x-auto-content > * {
+    margin-inline: auto;
+}
+
+.cursor-default > * {
+    cursor: default;
+}
+.no-select > * {
+    -webkit-touch-callout: none; /* iOS Safari */
+       -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Old versions of Firefox */
+           -ms-user-select: none; /* Internet Explorer/Edge */
+               user-select: none; /**/
+}

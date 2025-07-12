@@ -4,6 +4,8 @@ title: Vanjs
 
 <script type="text/javascript" src="./van-1.5.5.nomodule.min.js"></script>
 
+<div id="app" class="reset"></div>
+
 <script>
 const styled = (el) => {
   el.fontWeight = (v) => { el.style.fontWeight = v; return el; };
@@ -37,7 +39,13 @@ const styled = (el) => {
   el.bottom = (v) => { el.style.bottom = v; return el; };
   el.overflow = (v) => { el.style.overflow = v; return el; };
   el.maxHeight = (v) => { el.style.maxHeight = v; return el; };
-  return el;
+
+  el.mountIn = (elementId) => {
+      const target = document.getElementById(elementId)
+      van.add(target, el)
+  }
+
+    return el;
 };
 
 const styledTags = new Proxy({}, {
@@ -46,32 +54,93 @@ const styledTags = new Proxy({}, {
   }
 });
 
-const {button, div, pre, span} = styledTags
+const {button, div, pre, span, ul, li, p, style} = styledTags
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const Run = ({sleepMs}) => {
-  const steps = van.state(0)
-  ;(async () => { for (; steps.val < 40; ++steps.val) await sleep(sleepMs) })()
-  return pre(() => `${" ".repeat(40 - steps.val)}🚐💨Hello VanJS!${"_".repeat(steps.val)}`)
+const App = (element) => {
+    return div(element)
+        .background('white')
+        .color('black')
+        .width('300px')
+        .aspectRatio('9 / 16')
+        .display('flex')
+        .justifyContent('center')
+        .alignItems('center')
+        .marginInline('auto')
 }
 
-const Hello = () => {
-  const dom = div().background('red')
-  return div(
-    dom,
-    TestView(),
-    styled(button({onclick: () => van.add(dom, Run({sleepMs: 2000}))}, "Hello 🐌")).color('red'),
-    button({onclick: () => van.add(dom, Run({sleepMs: 500}))}, "Hello 🐢"),
-    button({onclick: () => van.add(dom, Run({sleepMs: 100}))}, "Hello 🚶‍♂️"),
-    button({onclick: () => van.add(dom, Run({sleepMs: 10}))}, "Hello 🏎️"),
-    button({onclick: () => van.add(dom, Run({sleepMs: 2}))}, "Hello 🚀"),
-  )
+const iOSAsyncList = (load) => {
+    const state = van.state(load())
 }
 
-const TestView = () => {
-    return span('hello world')
+const iOSList = (items, cell = (item) => li(item.text)) => {
+    const title = p('Screen')
+      .fontWeight('bold')
+      .fontSize('24px')
+      .marginBottom('12px')
+
+    const list = ul(...items.map(cell))
+    .background('white')
+    .borderRadius('8px')
+
+    const styles = style(`
+        .ios-list ul li:hover::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: -1px;
+          background: #D2D1D7;
+          border-radius: inherit;
+          z-index: -1;
+        }
+        .ios-list ul li {
+            position: relative;
+            padding: 8px 16px;
+            transition: background 0.2s ease;
+            z-index: 1;
+        }
+        .ios-list ul li:not(:first-child)::after {
+          content: '';
+          position: absolute;
+          left: 16px;
+          right: 0;
+          top: 0;
+          height: 0.5px;
+          background-color: #D2D1D7;
+        }
+        .ios-list ul li::before {
+          transition: background 0.2s ease;
+        }
+        .ios-list ul li:first-child {
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        }
+        .ios-list ul li:last-child {
+          border-bottom-left-radius: 8px;
+          border-bottom-right-radius: 8px;
+        }
+    `)
+
+    let view = div(title, list, styles)
+        .display('block')
+        .width('100%')
+        .height('100%')
+        .background('#efeef5')
+        .color('black')
+        .padding('16px')
+        .cursor('default')
+
+    view.classList.add('ios-list')
+    return view
 }
 
-van.add(document.body, Hello())
+
+const items = [
+    { text: "Item 1" },
+    { text: "Item 2" },
+    { text: "Item 3" }
+];
+
+App(iOSList(items)).mountIn('app')
 </script>
