@@ -1,12 +1,12 @@
 import { styledTags } from '../vanjs/styled.js'
 const { div, style } = styledTags
 
-const uid = () => crypto.randomUUID().slice(0, 8);
+const uid = () => 'anim_' + crypto.randomUUID().slice(0, 8);
 export const iOSProgressView = () => {
     const animationId = uid();
     const blades = Array.from({ length: 8 }, (_, i) => blade(i + 1, animationId))
 
-    return div(...blades, keyFrames(animationId))
+    return div(keyFrames(animationId),...blades)
     .position('relative')
     .width('20px')
     .height('20px')
