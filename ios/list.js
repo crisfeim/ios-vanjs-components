@@ -1,7 +1,7 @@
 import { styledTags } from '../vanjs/styled.js';
 const { p, ul, li, div, style } = styledTags;
 
-export const iOSList = (screenTitle, items = ['Item 1', 'Item 2'], cell = (item) => li(item)) => {
+export const iOSList = (screenTitle, items, cell = (item) => li(item)) => {
     const title = p(screenTitle)
       .fontWeight('bold')
       .fontSize('24px')
