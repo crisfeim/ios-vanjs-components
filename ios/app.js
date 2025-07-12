@@ -1,7 +1,7 @@
 import van from "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.5.min.js"
-import { styledTags } from './vanjs/styled.js';
-import { iOSList } from './ios/list.js';
-import { iOSAsyncList } from './ios/asynclist.js';
+import { styledTags } from '../vanjs/styled.js';
+import { iOSList } from './list.js';
+import { iOSAsyncList } from './asynclist.js';
 const {button, div, pre, span, ul, li, p, style} = styledTags
 
 export const App = (element) => {
