@@ -16,7 +16,7 @@ const mockLoader = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(['Item 1', 'Item 2', 'Item 3']);
-    }, 1000);
+    }, 10000);
   });
 
 const githubLoader = () => {
@@ -31,5 +31,5 @@ const githubLoader = () => {
 const mockList = iOSAsyncList('Screen', mockLoader)
 const githubList = iOSAsyncList('Github', githubLoader)
 
-div(App(githubList)).mountIn('app');
+div(App(mockList)).mountIn('app');
 </script>
