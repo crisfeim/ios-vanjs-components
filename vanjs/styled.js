@@ -43,6 +43,9 @@ const styled = (el) => {
   el.overflow = (v) => { el.style.overflow = v; return el; };
   el.maxHeight = (v) => { el.style.maxHeight = v; return el; };
   el.animationDelay = (v) => { el.style.animationDelay = v; return el; };
+  el.animation = (v) => { el.style.animation = v; return el; };
+  el.willChange = (v) => { el.style.willChange = v; return el; };
+  el.backgroundColor = (v) => { el.style.backgroundColor = v; return el; };
 
   el.onAppear = (callback) => { onVisible(el, callback) ; return  el; }
   el.onClick = (onClick) => {
