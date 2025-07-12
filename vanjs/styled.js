@@ -42,6 +42,8 @@ const styled = (el) => {
   el.bottom = (v) => { el.style.bottom = v; return el; };
   el.overflow = (v) => { el.style.overflow = v; return el; };
   el.maxHeight = (v) => { el.style.maxHeight = v; return el; };
+  el.animationDelay = (v) => { el.style.animationDelay = v; return el; };
+
   el.onAppear = (callback) => { onVisible(el, callback) ; return  el; }
   el.onClick = (onClick) => {
       el.addEventListener('click', onClick);
