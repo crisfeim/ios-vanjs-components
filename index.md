@@ -1,14 +1,25 @@
 ---
-title: Vanjs
+title: iOS
 ---
 
-<div id="app" class="reset no-select"></div>
+# NavigationBar
+
+<div id="navigation-bar"></div>
+
+# Github app
+
+<div id="mock-github-app-container" class="reset no-select"></div>
+
+# Mock app
+
+<div id="mock-app-container" class="reset no-select"></div>
 
 <script type="module">
 import { styledTags } from './vanjs/styled.js'
 import { App } from './ios/app.js'
 import { iOSProgressView } from './ios/progressView.js'
 import { iOSAsyncList } from './ios/asynclist.js'
+import { iOSNavigationBar } from './ios/navigationBar.js'
 
 const { div } = styledTags;
 
@@ -44,9 +55,7 @@ const delay = (seconds, promiseFn) => {
 const mockList = () => iOSAsyncList('Screen', mockLoader)
 const githubList = () => iOSAsyncList('Github', delay(2,githubLoader))
 
-div(
-    App(githubList()),
-    App(mockList())
-)
-.mountIn('app');
+App(githubList()).mountIn('mock-github-app-container');
+App(mockList()).mountIn('mock-app-container');
+iOSNavigationBar().mountIn('navigation-bar');
 </script>
