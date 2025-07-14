@@ -10,8 +10,4 @@ export const App = (element) => {
         .color('black')
         .width('300px')
         .aspectRatio('9 / 16')
-        .display('flex')
-        .justifyContent('center')
-        .alignItems('center')
-        .marginInline('auto')
 }

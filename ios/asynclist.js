@@ -15,7 +15,12 @@ export const iOSAsyncList = (screenTitle, loader) => {
     return div(() => {
         const { status, payload } = state.val;
         if (status === "loading") return iOSProgressView();
-        if (status === "success") return iOSList(screenTitle, payload).width('300px').aspectRatio('9 / 16');
+        if (status === "success") return iOSList(screenTitle, payload);
         if (status === "error") return p('Error');
       }).onAppear(() => load())
+    .width('100%')
+    .height('100%')
+    .display('flex')
+    .alignItems('center')
+    .justifyContent('center')
 }

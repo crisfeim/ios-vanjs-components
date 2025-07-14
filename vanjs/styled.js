@@ -46,6 +46,9 @@ const styled = (el) => {
   el.animation = (v) => { el.style.animation = v; return el; };
   el.willChange = (v) => { el.style.willChange = v; return el; };
   el.backgroundColor = (v) => { el.style.backgroundColor = v; return el; };
+  el.maxWidth = (v) => { el.style.maxWidth = v; return el; };
+  el.boxSizing = (v) => { el.style.boxSizing = v; return el; };
+  el.listStyle = (v) => { el.style.listStyle = v; return el; };
 
   el.onAppear = (callback) => { onVisible(el, callback) ; return  el; }
   el.onClick = (onClick) => {

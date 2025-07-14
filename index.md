@@ -2,27 +2,23 @@
 title: iOS
 ---
 
-# NavigationBar
+## NavigationBar
 
 <ios-navigation-bar></ios-navigation-bar>
 
+## List
+
+<ios-app>
+    <ios-list></ios-list>
+</ios-app>
+
+## Async list
+
+<ios-app>
+    <ios-async-list></ios-async-list>
+</ios-app>
+
 <!-- <script type="module">
-import { define } from './vanjs/elements.js'
-// import { styledTags } from './vanjs/styled.js'
-// import { App } from './ios/app.js'
-// import { iOSProgressView } from './ios/progressView.js'
-// import { iOSAsyncList } from './ios/asynclist.js'
-// import { iOSNavigationBar } from './ios/navigationBar.js'
-
-// const { div } = styledTags;
-
-// const mockLoader = () =>
-//   new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(['Item 1', 'Item 2', 'Item 3']);
-//     }, 3);
-//   });
-
 // const githubLoader = () => {
 //   return fetch('./data/github.json')
 //     .then((res) => {
@@ -44,23 +40,29 @@ import { define } from './vanjs/elements.js'
 //     })
 //   }
 // }
-
-// const mockList = () => iOSAsyncList('Screen', mockLoader)
-// const githubList = () => iOSAsyncList('Github', delay(2,githubLoader))
-
-// App(githubList()).mountIn('mock-github-app-container');
-// App(mockList()).mountIn('mock-app-container');
-
-const p = { van.tags }
-define("hello-world", () =>
-  p({ style: "color:red;font-size:20px" }, "Hello world!")
-);
 </script> -->
 
 <script type="module">
 import { styledTags } from './vanjs/styled.js'
 import { define } from './vanjs/elements.js'
+import { App } from './ios/app.js'
 import { iOSNavigationBar } from './ios/navigationBar.js'
+import { iOSAsyncList } from './ios/asynclist.js'
+import { iOSList } from './ios/list.js'
 
+const { p, slot } = styledTags
+
+const mockLoader = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(['Item 1', 'Item 2', 'Item 3']);
+    }, 5000);
+});
+
+
+const mockAsyncList = () => iOSAsyncList('Async List', mockLoader)
 define("ios-navigation-bar", () => iOSNavigationBar('NavigationBar', () => alert('Back button clicked')));
+define("ios-app", () => App(slot()))
+define('ios-async-list', mockAsyncList)
+define('ios-list', () => iOSList('List', ['Item 1', 'Item 2']))
 </script>

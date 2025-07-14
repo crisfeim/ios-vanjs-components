@@ -10,7 +10,8 @@ export const iOSList = (screenTitle, items, cell = (item) => li(item)) => {
     const list = ul(...items.map(cell))
     .background('white')
     .borderRadius('8px')
-
+    .listStyle('none')
+    .padding(0)
 
     const styles = style(`
         .ios-list ul li:hover::before {
@@ -53,14 +54,14 @@ export const iOSList = (screenTitle, items, cell = (item) => li(item)) => {
     `)
 
     let view = div(title, list, styles)
-        .display('block')
-        .width('100%')
-        .height('100%')
         .background('#efeef5')
         .color('black')
-        .padding('16px')
         .cursor('default')
         .overflow('scroll')
+        .width('100%')
+        .height('100%')
+        .padding('16px')
+        .boxSizing('border-box')
 
     view.classList.add('ios-list')
     return view
