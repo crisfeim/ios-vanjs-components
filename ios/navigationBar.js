@@ -16,12 +16,17 @@ export const iOSNavigationBar = (title, onBackButtonClick) => {
   .padding('16px')
   .backgroundColor('white')
   .color('black')
+  .width('100%')
 }
 
 const iOSNavigationBackButton = (onClick) => div(
   iOSChevron().marginRight('4px'),
-  iOSButton('Back', onClick).cursor('pointer')
-).cursor('pointer')
+  iOSButton('Back', onClick).fontSize('1rem').cursor('pointer')
+)
+.display('flex')
+.alignItems('center')
+.cursor('pointer')
+.fontSize('1rem')
 
 const iOSChevron = (color = '#007AFF') => div([])
         .display('inline-block')
