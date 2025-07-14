@@ -1,3 +1,4 @@
+import van from "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.5.min.js"
 export function define(t, e, s={
     mode: "open"
 }) {
