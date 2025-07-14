@@ -3,9 +3,9 @@ import { styledTags } from '../vanjs/styled.js';
 const { div, span, button } = styledTags
 
 export const iOSNavigationBar = (title, onBackButtonClick) => {
-  let titleView = span('title')
+  let titleView = span(title)
   return div(
-    iOSNavigationBackButton(),
+    iOSNavigationBackButton(onBackButtonClick),
     div(titleView.fontWeight('bold'))
       .position('absolute')
       .left('50%')
