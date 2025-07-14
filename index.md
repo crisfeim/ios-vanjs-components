@@ -36,9 +36,8 @@ const mockLoader = () =>
 });
 
 
-const mockAsyncList = () => iOSAsyncList('Async List', mockLoader)
 define("ios-navigation-bar", () => iOSNavigationBar('NavigationBar', () => alert('Back button clicked')));
 define("ios-app", () => App(slot()))
-define('ios-async-list', mockAsyncList)
+define('ios-async-list', () => iOSAsyncList('Async List', mockLoader))
 define('ios-list', () => iOSList('List', ['Item 1', 'Item 2']))
 </script>
