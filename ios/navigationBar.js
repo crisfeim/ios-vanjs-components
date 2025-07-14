@@ -21,7 +21,7 @@ export const iOSNavigationBar = (title, onBackButtonClick) => {
 
 const iOSNavigationBackButton = (onClick) => div(
   iOSChevron().marginRight('4px'),
-  iOSButton('Back', onClick).fontSize('1rem').cursor('pointer')
+  iOSButton('Back', onClick)
 )
 .display('flex')
 .alignItems('center')
@@ -38,5 +38,9 @@ const iOSChevron = (color = '#007AFF') => div([])
 
 
 const iOSButton = (label, onClick) => button(label)
+  .all('unset')
   .color('#007AFF')
   .onClick(onClick)
+  .fontSize('1rem')
+  .cursor('pointer')
+  .background('transparent')
