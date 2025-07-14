@@ -25,16 +25,9 @@ import { App } from './ios/app.js'
 import { iOSNavigationBar } from './ios/navigationBar.js'
 import { iOSAsyncList } from './ios/asynclist.js'
 import { iOSList } from './ios/list.js'
+import { mockLoader } from './infra/mock-loader.js'
 
 const { p, slot } = styledTags
-
-const mockLoader = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(['Item 1', 'Item 2', 'Item 3']);
-    }, 5000);
-});
-
 
 define("ios-navigation-bar", () => iOSNavigationBar('NavigationBar', () => alert('Back button clicked')));
 define("ios-app", () => App(slot()))
